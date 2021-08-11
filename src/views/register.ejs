@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+       
+        <% if(locals.usuario){ %>
+            <p>Hola <%= locals.usuario.nombre %>, elegiste el color: <%= locals.usuario.color %>, tu email es:
+                <%= locals.usuario.email %></p>
+        <%}%>
+
+      
+        <form action="/users/register" method="POST">
+            <label for="nombre">Ingrese su Nombre</label>
+            <input type="text" name="nombre" value="<%= locals.old && old.nombre ? old.nombre : ""%>">
+            <% if (locals.errors && errors.nombre) { %>
+                <p><%= errors.nombre.msg%></p>
+            <% } %>
+            <br>
+             
+            <select name="color" id="">
+                <option value="" hidden selected>Elija su color preferido</option>
+                <option value="azul" <%=locals.old && old.color=== "azul" ? "selected" : ""%>>azul</option>
+                <option value="amarillo" <%=locals.old && old.color=== "amarillo" ? "selected" : ""%>>amarillo</option>
+                <option value="negro" <%=locals.old && old.color=== "negro" ? "selected" : ""%>>negro</option>
+            </select>
+            <% if (locals.errors && errors.color) { %>
+                <p><%= errors.color.msg%></p>
+            <% } %>
+            <br>
+    
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" value="<%= locals.old && old.email ? old.email : ""%>"> 
+            <% if (locals.errors && errors.email) { %>
+                <p><%= errors.email.msg%></p>
+            <% } %>
+            <br>
+    
+    
+            <label for="edad">Edad</label>
+            <input type="number" name="edad" id="edad" value="">
+            <% if (locals.errors && errors.edad) { %>
+                <p><%= errors.edad.msg%></p>
+            <% } %>
+            <br>
+
+        <button type="submit">Enviar</button>
+    </form>
+    </main>
+    
+</body>
+</html>
